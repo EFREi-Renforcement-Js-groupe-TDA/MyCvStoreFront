@@ -15,23 +15,30 @@ function Login() {
                 password: "",
             }}
             onSubmit={async (values) => {
+                console.log(JSON.stringify(values));
+
                 try {
                     const response = await fetch("http://localhost:3003/api/auth/login", {
                         method: "POST",
-                        data: values,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(values),
                     });
 
-                    if (response.status === 200 || 201) {
+                    if (response.ok) {
                         const data = await response.json();
                         login(data);
                         navigate("/", { replace: true });
+                    } else {
+                        console.error("Login failed");
                     }
                 } catch (error) {
-                    console.log(error.message);
+                    console.error("Error:", error);
                 }
             }}
             validationSchema={Yup.object({
-                login: Yup.string().required("Required"),
+                email: Yup.string().required("Required"),
                 password: Yup.string().required("Required"),
             })}
         >
