@@ -37,29 +37,29 @@ function Register() {
             {({ isSubmitting }) => (
                 <Form>
                     <div className="form-group">
-                        <label htmlFor="name">Name:</label>
-                        <Field className="form-control" type="name" name="name" />
-                        <ErrorMessage style={{ color: "red" }} name="name" component="div" />
-                    </div>
-                    <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <Field className="form-control" type="email" name="email" />
                         <ErrorMessage style={{ color: "red" }} name="email" component="div" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="login">Login:</label>
-                        <Field className="form-control" type="login" name="login" />
-                        <ErrorMessage style={{ color: "red" }} name="login" component="div" />
+                        <label htmlFor="name">Nom :</label>
+                        <Field className="form-control" type="lastname" name="lastname" />
+                        <ErrorMessage style={{ color: "red" }} name="lastname" component="div" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="name">Prénom :</label>
+                        <Field className="form-control" type="firstname" name="firstname" />
+                        <ErrorMessage style={{ color: "red" }} name="firstname" component="div" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Mot de passe :</label>
                         <Field className="form-control" type="password" name="password" />
                         <ErrorMessage style={{ color: "red" }} name="password" component="div" />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="confirPassword">Confirm Password:</label>
-                        <Field className="form-control" type="confirPassword" name="confirPassword" />
+                        <label htmlFor="confirPassword">Confirmez le mot de passe :</label>
+                        <Field className="form-control" type="confirmPassword" name="confirmPassword" />
                         <ErrorMessage style={{ color: "red" }} name="password" component="div" />
                     </div>
                     <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>

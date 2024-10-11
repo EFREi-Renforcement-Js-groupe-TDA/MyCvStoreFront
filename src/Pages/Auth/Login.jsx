@@ -38,12 +38,12 @@ function Login() {
             {({ isSubmitting }) => (
                 <Form>
                     <div className="form-group">
-                        <label htmlFor="login">Login:</label>
+                        <label htmlFor="login">Email :</label>
                         <Field className="form-control" type="login" name="login" />
                         <ErrorMessage style={{ color: "red" }} name="login" component="div" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="login">Password:</label>
+                        <label htmlFor="login">Mot de passe :</label>
                         <Field className="form-control" type="password" name="password" />
                         <ErrorMessage style={{ color: "red" }} name="password" component="div" />
                     </div>
