@@ -6,9 +6,9 @@ export const UserContext = createContext(null);
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    const login = (logInfos) => {
-        setUser({ ...logInfos, name: "Toto" });
-        localStorage.setItem("user", JSON.stringify({ ...logInfos, name: "Toto" }));
+    const login = () => {
+        setUser({ ...logInfos, name: email });
+        localStorage.setItem("user", JSON.stringify(getUserInfos()));
     };
 
     const logout = () => {

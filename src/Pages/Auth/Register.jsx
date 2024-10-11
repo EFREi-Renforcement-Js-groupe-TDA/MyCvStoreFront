@@ -9,14 +9,14 @@ function Register() {
     return (
         <Formik
             initialValues={{
-                name: "",
                 email: "",
-                login: "",
+                lastName: "",
+                firstName: "",
                 password: "",
                 confirmPassword: "",
             }}
             onSubmit={async (values) => {
-                const postForm = await fetch("https://jsonplaceholder.typicode.com/users", {
+                const postForm = await fetch("http://localhost:3003/api/auth/register", {
                     method: "POST",
                     data: values,
                 });
@@ -25,31 +25,31 @@ function Register() {
                 navigate("/");
             }}
             validationSchema={Yup.object({
-                name: Yup.string().min(3, "Must be at least 3 characters").max(10, "Must be 15 characters or less").required("Required"),
-                email: Yup.string().email("Invalid email address").required("Required"),
-                login: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+                email: Yup.string().email("Adresse email invalide").required("Required"),
+                lastName: Yup.string().min(2, "La longueur minimum est de 2 caractères").max(15, "La longueur maximum est de 15 caractères").required("Required"),
+                firstName: Yup.string().max(15, "La longueur maximum est de 15 caractères").required("Required"),
                 password: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
                 confirmPassword: Yup.string()
-                    .oneOf([Yup.ref("password"), null], "Passwords must match")
+                    .oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre")
                     .required("Required"),
             })}
         >
             {({ isSubmitting }) => (
                 <Form>
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">Email :</label>
                         <Field className="form-control" type="email" name="email" />
                         <ErrorMessage style={{ color: "red" }} name="email" component="div" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Nom :</label>
-                        <Field className="form-control" type="lastname" name="lastname" />
-                        <ErrorMessage style={{ color: "red" }} name="lastname" component="div" />
+                        <Field className="form-control" type="lastName" name="lastName" />
+                        <ErrorMessage style={{ color: "red" }} name="lastName" component="div" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Prénom :</label>
-                        <Field className="form-control" type="firstname" name="firstname" />
-                        <ErrorMessage style={{ color: "red" }} name="firstname" component="div" />
+                        <Field className="form-control" type="firstName" name="firstName" />
+                        <ErrorMessage style={{ color: "red" }} name="firstName" component="div" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Mot de passe :</label>
@@ -59,8 +59,8 @@ function Register() {
 
                     <div className="form-group">
                         <label htmlFor="confirPassword">Confirmez le mot de passe :</label>
-                        <Field className="form-control" type="confirmPassword" name="confirmPassword" />
-                        <ErrorMessage style={{ color: "red" }} name="password" component="div" />
+                        <Field className="form-control" type="password" name="confirmPassword" />
+                        <ErrorMessage style={{ color: "red" }} name="confirmPassword" component="div" />
                     </div>
                     <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>
                         Submit

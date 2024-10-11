@@ -11,12 +11,12 @@ function Login() {
     return (
         <Formik
             initialValues={{
-                login: "",
+                email: "",
                 password: "",
             }}
             onSubmit={async (values) => {
                 try {
-                    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+                    const response = await fetch("http://localhost:3003/api/auth/login", {
                         method: "POST",
                         data: values,
                     });
@@ -39,8 +39,8 @@ function Login() {
                 <Form>
                     <div className="form-group">
                         <label htmlFor="login">Email :</label>
-                        <Field className="form-control" type="login" name="login" />
-                        <ErrorMessage style={{ color: "red" }} name="login" component="div" />
+                        <Field className="form-control" type="email" name="email" />
+                        <ErrorMessage style={{ color: "red" }} name="email" component="div" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="login">Mot de passe :</label>
