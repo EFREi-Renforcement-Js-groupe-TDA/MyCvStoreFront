@@ -19,8 +19,6 @@ function Login() {
                     password: "",
                 }}
                 onSubmit={async (values) => {
-                    console.log(JSON.stringify(values));
-
                     try {
                         const response = await fetch("http://localhost:3003/api/auth/login", {
                             method: "POST",
