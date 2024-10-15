@@ -3,8 +3,11 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import FlashMessage from "../../Components/FlashMessage";
+import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
 
 function Register() {
+    useRequireOfflineUser();
+
     const navigate = useNavigate();
     const [flashMessage, setFlashMessage] = React.useState("");
 

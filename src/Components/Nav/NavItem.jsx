@@ -16,8 +16,4 @@ NavItem.propTypes = {
     path: PropTypes.string,
 };
 
-NavItem.defaultProps = {
-    path: "/",
-};
-
 export default NavItem;

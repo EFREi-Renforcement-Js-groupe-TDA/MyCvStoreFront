@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { UserContext } from "../../Context/UserContext.jsx";
 import FlashMessage from "../../Components/FlashMessage";
+import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
 
 function Login() {
+    useRequireOfflineUser();
+
     const navigate = useNavigate();
     const { login } = useContext(UserContext);
     const [flashMessage, setFlashMessage] = React.useState("");
