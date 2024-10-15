@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext.jsx";
 import { useContext } from "react";
+import NavItem from "./NavItem";
 
 function Header() {
     const { getUserInfos, logout } = useContext(UserContext);
@@ -17,42 +18,21 @@ function Header() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li>
-                            <Link to={"/"} className="nav-link">
-                                Voir les CV
-                            </Link>
-                        </li>
-                        {user && (
-                            <li>
-                                <Link to={"/my_cv"} className="nav-link">
-                                    Mes CV
-                                </Link>
-                            </li>
-                        )}
+                        <NavItem title={"Voir les CV"} path={"/"} />
+
+                        {user && <NavItem title={"mon CV"} path={"/my_cv"} />}
                     </ul>
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item">
-                            {user ? (
-                                <Link to={"/profile"} className="nav-link">
-                                    Mon profile
-                                </Link>
-                            ) : (
-                                <Link to={"/register"} className="nav-link">
-                                    S'enregistrer
-                                </Link>
-                            )}
-                        </li>
-                        <li className="nav-item">
-                            {user ? (
+                        {user ? <NavItem title={"Mon profile"} path={"/profile"} /> : <NavItem title={"S'enregistrer"} path={"/register"} />}
+                        {user ? (
+                            <li>
                                 <span role="button" className="nav-link" onClick={logout}>
                                     Déconnexion
                                 </span>
-                            ) : (
-                                <Link to={"/login"} className="nav-link">
-                                    Connexion
-                                </Link>
-                            )}
-                        </li>
+                            </li>
+                        ) : (
+                            <NavItem title={"Se connecter"} path={"/login"} />
+                        )}
                     </ul>
                 </div>
             </div>

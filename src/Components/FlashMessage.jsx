@@ -12,7 +12,7 @@ const FlashMessage = ({ message, type }) => {
 };
 
 FlashMessage.propTypes = {
-    message: PropTypes.string,
+    message: PropTypes.string.isRequired,
     type: PropTypes.string,
 };
 
