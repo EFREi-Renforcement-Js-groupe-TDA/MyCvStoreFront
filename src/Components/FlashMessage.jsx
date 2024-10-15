@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FlashMessage = ({ message, type }) => {
+const FlashMessage = ({ message, type = "danger" }) => {
     if (!message) return null;
 
     return (
@@ -14,10 +14,6 @@ const FlashMessage = ({ message, type }) => {
 FlashMessage.propTypes = {
     message: PropTypes.string.isRequired,
     type: PropTypes.string,
-};
-
-FlashMessage.defaultProps = {
-    type: "danger",
 };
 
 export default FlashMessage;

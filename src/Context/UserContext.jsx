@@ -21,7 +21,7 @@ const UserProvider = ({ children }) => {
             return user;
         } else {
             const storeUser = localStorage.getItem("user");
-            if (storeUser) {
+            if (storeUser && storeUser !== "undefined") {
                 setUser(JSON.parse(storeUser));
                 return storeUser;
             }
