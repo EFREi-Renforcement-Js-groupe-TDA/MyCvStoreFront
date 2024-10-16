@@ -1,10 +1,10 @@
 import { useRequireLoggedUser } from "../../Utils/Security/AuthorizationHelper";
 import UserProfile from "../../Components/User/Profile/UserProfile";
 
-function Profile() {
+function EditProfile() {
     useRequireLoggedUser();
 
-    return <UserProfile isEditMode={false} />;
+    return <UserProfile isEditMode={true} />;
 }
 
-export default Profile;
+export default EditProfile;

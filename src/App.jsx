@@ -5,6 +5,7 @@ import Register from "./Pages/Auth/Register.jsx";
 import Login from "./Pages/Auth/Login.jsx";
 import Profile from "./Pages/User/Profile";
 import Index from "./Pages/CV/CvIndex";
+import EditProfile from "./Pages/User/EditProfile";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
 
                 {/*User*/}
                 <Route path={"/profile"} element={<Profile />} />
+                <Route path={"/profile/edit"} element={<EditProfile />} />
             </Routes>
         </div>
     );
