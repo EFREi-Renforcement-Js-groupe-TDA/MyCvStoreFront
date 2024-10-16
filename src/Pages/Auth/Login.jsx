@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { UserContext } from "../../Context/UserContext.jsx";
 import FlashMessage from "../../Components/Misc/FlashMessage";
 import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
+import { getApiUrl } from "../../Utils/Misc/EnvReader";
 
 function Login() {
     useRequireOfflineUser();
@@ -23,7 +24,7 @@ function Login() {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch("http://localhost:3003/api/auth/login", {
+                        const response = await fetch(`${getApiUrl()}/auth/login`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",

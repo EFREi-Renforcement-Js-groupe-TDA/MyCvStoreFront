@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import FlashMessage from "../../Components/Misc/FlashMessage";
 import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
+import { getApiUrl } from "../../Utils/Misc/EnvReader";
 
 function Register() {
     useRequireOfflineUser();
@@ -24,7 +25,7 @@ function Register() {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch("http://localhost:3003/api/auth/register", {
+                        const response = await fetch(`${getApiUrl()}/auth/register`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",

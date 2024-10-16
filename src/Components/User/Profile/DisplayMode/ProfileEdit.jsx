@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import React from "react";
 import FlashMessage from "../../../Misc/FlashMessage";
 import { useNavigate } from "react-router-dom";
+import { getApiUrl } from "../../../../Utils/Misc/EnvReader";
 
 const ProfileEdit = ({ userData, userId, userToken }) => {
     const [flashMessage, setFlashMessage] = React.useState("");
@@ -27,7 +28,7 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch(`http://localhost:3003/api/user/${userId}`, {
+                        const response = await fetch(`${getApiUrl()}/user/${userId}`, {
                             method: "PATCH",
                             headers: {
                                 Authorization: `Bearer ${userToken}`,
@@ -51,7 +52,9 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                     firstname: Yup.string().max(15, "La longueur maximum du prénom est de 15 caractères").required("Requis"),
                     password: Yup.string().max(15, "Le mot de passe ne doit pas dépasser 15 caractères"),
                     confirmPassword: Yup.string().when("password", (password, schema) => {
-                        return password && password.length > 0 ? schema.oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre").required("Requis") : schema.notRequired();
+                        return password && password[0] && password[0].length > 0
+                            ? schema.oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre").required("Requis")
+                            : schema.notRequired();
                     }),
                 })}
             >
@@ -100,8 +103,8 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
 
 ProfileShow.propTypes = {
     userData: PropTypes.object.isRequired,
-    userId: PropTypes.string.isRequired,
-    userToken: PropTypes.string.isRequired,
+    userId: PropTypes.string,
+    userToken: PropTypes.string,
 };
 
 export default ProfileEdit;

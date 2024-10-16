@@ -5,6 +5,7 @@ import FlashMessage from "../../Misc/FlashMessage";
 import PropTypes from "prop-types";
 import ProfileShow from "./DisplayMode/ProfileShow";
 import ProfileEdit from "./DisplayMode/ProfileEdit";
+import { getApiUrl } from "../../../Utils/Misc/EnvReader";
 
 const UserProfile = ({ isEditMode }) => {
     const userId = GetAuthenticatedUserId();
@@ -15,7 +16,7 @@ const UserProfile = ({ isEditMode }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:3003/api/user/${userId}`, {
+        fetch(`${getApiUrl()}/user/${userId}`, {
             headers: {
                 Authorization: `Bearer ${userToken}`,
             },
