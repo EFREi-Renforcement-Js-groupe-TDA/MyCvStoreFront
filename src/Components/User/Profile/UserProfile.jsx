@@ -1,7 +1,7 @@
 import { GetAuthenticatedUserId, GetAuthenticatedUserToken } from "../../../Utils/Security/AuthorizationHelper";
 import { useState, useEffect } from "react";
 import LoaderSpinner from "../../Misc/LoaderSpinner";
-import FlashMessage from "../../FlashMessage";
+import FlashMessage from "../../Misc/FlashMessage";
 import PropTypes from "prop-types";
 import ProfileShow from "./DisplayMode/ProfileShow";
 import ProfileEdit from "./DisplayMode/ProfileEdit";
@@ -52,7 +52,7 @@ const UserProfile = ({ isEditMode }) => {
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title mb-4">Mon profil</h5>
-                        {isEditMode ? <ProfileEdit userData={userData} /> : <ProfileShow userData={userData} />}
+                        {isEditMode ? <ProfileEdit userData={userData} userId={userId} userToken={userToken} /> : <ProfileShow userData={userData} />}
                     </div>
                 </div>
             )}

@@ -2,7 +2,7 @@ import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import FlashMessage from "../../Components/FlashMessage";
+import FlashMessage from "../../Components/Misc/FlashMessage";
 import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
 
 function Register() {
@@ -42,13 +42,13 @@ function Register() {
                     }
                 }}
                 validationSchema={Yup.object({
-                    email: Yup.string().email("Adresse email invalide").required("Required"),
-                    lastname: Yup.string().min(2, "La longueur minimum est de 2 caractères").max(15, "La longueur maximum est de 15 caractères").required("Required"),
-                    firstname: Yup.string().max(15, "La longueur maximum est de 15 caractères").required("Required"),
-                    password: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+                    email: Yup.string().email("Adresse email invalide").required("Requis"),
+                    lastname: Yup.string().min(2, "La longueur minimum est de 2 caractères").max(15, "La longueur maximum est de 15 caractères").required("Requis"),
+                    firstname: Yup.string().max(15, "La longueur maximum est de 15 caractères").required("Requis"),
+                    password: Yup.string().max(15, "Doit être de 15 caractères maximum").required("Requis"),
                     confirmPassword: Yup.string()
                         .oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre")
-                        .required("Required"),
+                        .required("Requis"),
                 })}
             >
                 {({ isSubmitting }) => (
@@ -68,17 +68,18 @@ function Register() {
                             <Field className="form-control" type="firstname" name="firstname" />
                             <ErrorMessage style={{ color: "red" }} name="firstname" component="div" />
                         </div>
+
                         <div className="form-group">
                             <label htmlFor="password">Mot de passe :</label>
                             <Field className="form-control" type="password" name="password" />
                             <ErrorMessage style={{ color: "red" }} name="password" component="div" />
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="confirPassword">Confirmez le mot de passe :</label>
                             <Field className="form-control" type="password" name="confirmPassword" />
                             <ErrorMessage style={{ color: "red" }} name="confirmPassword" component="div" />
                         </div>
+
                         <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
