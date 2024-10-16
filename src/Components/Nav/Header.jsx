@@ -20,7 +20,7 @@ function Header() {
                     <ul className="navbar-nav">
                         <NavItem title={"Voir les CV"} path={"/"} />
 
-                        {user && <NavItem title={"mon CV"} path={"/my_cv"} />}
+                        {user && <NavItem title={"Mon CV"} path={"/my_cv"} />}
                     </ul>
                     <ul className="navbar-nav ms-auto">
                         {user ? <NavItem title={"Mon profile"} path={"/profile"} /> : <NavItem title={"S'enregistrer"} path={"/register"} />}

@@ -25,3 +25,17 @@ export const useRequireOfflineUser = () => {
         }
     }, [user, navigate]);
 };
+
+export const GetAuthenticatedUserId = () => {
+    const { getUserInfos } = useContext(UserContext);
+    const userInfos = getUserInfos();
+
+    return userInfos ? userInfos.user.id : null;
+};
+
+export const GetAuthenticatedUserToken = () => {
+    const { getUserInfos } = useContext(UserContext);
+    const userInfos = getUserInfos();
+
+    return userInfos ? userInfos.user.token : null;
+};
