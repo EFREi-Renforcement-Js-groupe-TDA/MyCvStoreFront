@@ -1,5 +1,6 @@
 import { GetAuthenticatedUserId, GetAuthenticatedUserToken, useRequireLoggedUser } from "../../Utils/Security/AuthorizationHelper";
 import { useState } from "react";
+import LoaderSpinner from "../../Components/Misc/LoaderSpinner";
 
 function Profile() {
     useRequireLoggedUser();
@@ -32,7 +33,7 @@ function Profile() {
         });
 
     if (loading) {
-        return <div>Chargement en cours...</div>;
+        return <LoaderSpinner />;
     }
 
     if (error) {
