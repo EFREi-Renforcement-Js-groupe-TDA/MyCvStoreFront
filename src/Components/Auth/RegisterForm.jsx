@@ -1,45 +1,39 @@
-import PropTypes from "prop-types";
+import FlashMessage from "../Misc/FlashMessage";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { getApiUrl } from "../../Utils/Misc/EnvReader";
 import * as Yup from "yup";
-import React from "react";
-import FlashMessage from "../../../Misc/FlashMessage";
 import { useNavigate } from "react-router-dom";
-import { getApiUrl } from "../../../../Utils/Misc/EnvReader";
+import React from "react";
 
-const ProfileEdit = ({ userData, userId, userToken }) => {
-    const [flashMessage, setFlashMessage] = React.useState("");
+const RegisterForm = () => {
     const navigate = useNavigate();
-
-    const goBack = () => {
-        navigate(`/profile`);
-    };
+    const [flashMessage, setFlashMessage] = React.useState("");
 
     return (
         <>
             <FlashMessage message={flashMessage} />
             <Formik
                 initialValues={{
-                    email: userData.email,
-                    lastname: userData.lastname,
-                    firstname: userData.firstname,
+                    email: "",
+                    lastname: "",
+                    firstname: "",
                     password: "",
                     confirmPassword: "",
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch(`${getApiUrl()}/user/${userId}`, {
-                            method: "PATCH",
+                        const response = await fetch(`${getApiUrl()}/auth/register`, {
+                            method: "POST",
                             headers: {
-                                Authorization: `Bearer ${userToken}`,
                                 "Content-Type": "application/json",
                             },
                             body: JSON.stringify(values),
                         });
 
                         if (response.ok) {
-                            navigate("/profile");
+                            navigate("/login", { replace: true });
                         } else {
-                            setFlashMessage("Erreur lors de la tentative de modification du profil.");
+                            setFlashMessage("Erreur lors de l'inscription. Vérifiez qu'un compte avec cet email existe déjà ou que le mot de passe est conforme.");
                         }
                     } catch (error) {
                         setFlashMessage("Erreur: " + error.message);
@@ -47,12 +41,12 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                 }}
                 validationSchema={Yup.object({
                     email: Yup.string().email("Adresse email invalide").required("Requis"),
-                    lastname: Yup.string().min(2, "La longueur minimum du nom est de 2 caractères").max(15, "La longueur maximum est de 15 caractères").required("Requis"),
-                    firstname: Yup.string().max(15, "La longueur maximum du prénom est de 15 caractères").required("Requis"),
-                    password: Yup.string().min(6, "La longueur minimum du mot de passe est de 6 caractères").max(15, "Le mot de passe ne doit pas dépasser 15 caractères"),
-                    confirmPassword: Yup.string().when("password", (password, schema) => {
-                        return password?.[0]?.length > 0 ? schema.oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre").required("Requis") : schema.notRequired();
-                    }),
+                    lastname: Yup.string().min(2, "La longueur minimum est de 2 caractères").max(15, "La longueur maximum est de 15 caractères").required("Requis"),
+                    firstname: Yup.string().max(15, "La longueur maximum est de 15 caractères").required("Requis"),
+                    password: Yup.string().max(15, "Doit être de 15 caractères maximum").required("Requis"),
+                    confirmPassword: Yup.string()
+                        .oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre")
+                        .required("Requis"),
                 })}
             >
                 {({ isSubmitting }) => (
@@ -73,8 +67,8 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                             <ErrorMessage style={{ color: "red" }} name="firstname" component="div" />
                         </div>
 
-                        <div className="form-group mt-5">
-                            <label htmlFor="password">Changer de mot de passe :</label>
+                        <div className="form-group">
+                            <label htmlFor="password">Mot de passe :</label>
                             <Field className="form-control" type="password" name="password" />
                             <ErrorMessage style={{ color: "red" }} name="password" component="div" />
                         </div>
@@ -83,14 +77,10 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                             <Field className="form-control" type="password" name="confirmPassword" />
                             <ErrorMessage style={{ color: "red" }} name="confirmPassword" component="div" />
                         </div>
-                        <div className="mt-3">
-                            <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-                                Modifier
-                            </button>
-                            <button className="btn btn-secondary ms-2" onClick={goBack}>
-                                Retour
-                            </button>
-                        </div>
+
+                        <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>
+                            S'enregistrer
+                        </button>
                     </Form>
                 )}
             </Formik>
@@ -98,10 +88,4 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
     );
 };
 
-ProfileEdit.propTypes = {
-    userData: PropTypes.object.isRequired,
-    userId: PropTypes.string,
-    userToken: PropTypes.string,
-};
-
-export default ProfileEdit;
+export default RegisterForm;
