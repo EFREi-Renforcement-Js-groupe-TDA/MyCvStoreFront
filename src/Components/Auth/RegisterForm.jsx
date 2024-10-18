@@ -79,7 +79,7 @@ const RegisterForm = () => {
                         </div>
 
                         <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>
-                            S'enregistrer
+                            S&apos;enregistrer
                         </button>
                     </Form>
                 )}

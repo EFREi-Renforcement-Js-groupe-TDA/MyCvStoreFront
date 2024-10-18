@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 export const UserContext = createContext(null);
@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem("user");
+        window.location.href = "/";
     };
 
     const getUserInfos = () => {

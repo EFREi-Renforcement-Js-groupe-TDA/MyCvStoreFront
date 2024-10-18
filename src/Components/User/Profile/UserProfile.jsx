@@ -36,7 +36,7 @@ const UserProfile = ({ isEditMode }) => {
                 setError("Une erreur critique est survenue lors de la récupération des informations");
                 setLoading(false);
             });
-    }, [userId]);
+    }, [userId, userToken]);
 
     if (loading) {
         return <LoaderSpinner />;

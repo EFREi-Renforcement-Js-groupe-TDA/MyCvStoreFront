@@ -1,6 +1,7 @@
 {
   "name": "mycvstorefront",
   "version": "1.0.0",
+  "type": "module",
   "description": "Storefront du projet final du cours renforcement JS. Groupe Thomas L., David W. et Antoine H.",
   "main": "src/main.jsx",
   "scripts": {

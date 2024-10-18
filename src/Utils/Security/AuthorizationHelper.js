@@ -12,6 +12,8 @@ export const useRequireLoggedUser = () => {
             navigate("/login");
         }
     }, [user, navigate]);
+
+    return !!user;
 };
 
 export const useRequireOfflineUser = () => {
