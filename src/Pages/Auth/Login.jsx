@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
 import LoginForm from "../../Components/Auth/LoginForm";
@@ -19,7 +18,7 @@ function Login() {
                 </div>
                 <div className="text-center mt-3">
                     <p>
-                        Vous n'avez pas de compte ? <Link to="/register">Inscrivez-vous</Link>
+                        Vous n&apos;avez pas de compte ? <Link to="/register">Inscrivez-vous</Link>
                     </p>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import { useRequireOfflineUser } from "../../Utils/Security/AuthorizationHelper";
 import RegisterForm from "../../Components/Auth/RegisterForm";
 import { Link } from "react-router-dom";

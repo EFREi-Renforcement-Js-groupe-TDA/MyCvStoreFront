@@ -1,9 +1,9 @@
 import FlashMessage from "../Misc/FlashMessage";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { getApiUrl } from "../../Utils/Misc/EnvReader";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { getApiRoute } from "../../Utils/Route/ApiRouteBuilder.js";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const RegisterForm = () => {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch(`${getApiUrl()}/auth/register`, {
+                        const response = await fetch(getApiRoute(`auth/register`), {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const RegisterForm = () => {
                         </div>
 
                         <button className="btn btn-primary mt-3" type="submit" disabled={isSubmitting}>
-                            S'enregistrer
+                            S&apos;enregistrer
                         </button>
                     </Form>
                 )}

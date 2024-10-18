@@ -1,10 +1,10 @@
 import FlashMessage from "../Misc/FlashMessage";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { getApiUrl } from "../../Utils/Misc/EnvReader";
 import * as Yup from "yup";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
+import { getApiRoute } from "../../Utils/Route/ApiRouteBuilder.js";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const LoginForm = () => {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch(`${getApiUrl()}/auth/login`, {
+                        const response = await fetch(getApiRoute(`auth/login`), {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
