@@ -32,7 +32,7 @@ const UserProfile = ({ isEditMode }) => {
                 setUserData(data);
                 setLoading(false);
             })
-            .catch((error) => {
+            .catch(() => {
                 setError("Une erreur critique est survenue lors de la récupération des informations");
                 setLoading(false);
             });
