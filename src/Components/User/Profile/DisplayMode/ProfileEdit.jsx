@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import React from "react";
 import FlashMessage from "../../../Misc/FlashMessage";
 import { useNavigate } from "react-router-dom";
-import { getApiUrl } from "../../../../Utils/Misc/EnvReader";
+import { getApiRoute } from "../../../../Utils/Route/ApiRouteBuilder.js";
 
 const ProfileEdit = ({ userData, userId, userToken }) => {
     const [flashMessage, setFlashMessage] = React.useState("");
@@ -27,7 +27,7 @@ const ProfileEdit = ({ userData, userId, userToken }) => {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        const response = await fetch(`${getApiUrl()}/user/${userId}`, {
+                        const response = await fetch(getApiRoute(`user/${userId}`), {
                             method: "PATCH",
                             headers: {
                                 Authorization: `Bearer ${userToken}`,
