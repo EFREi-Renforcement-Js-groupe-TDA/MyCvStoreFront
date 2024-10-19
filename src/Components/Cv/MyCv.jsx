@@ -6,10 +6,11 @@ import { getApiRoute } from "../../Utils/Route/ApiRouteBuilder.js";
 import PropTypes from "prop-types";
 import MyCvViewModeEnum from "../../Enum/MyCvViewModeEnum.js";
 import { Link } from "react-router-dom";
+import ManageMyCv from "./MyCvDisplayMode/ManageMyCv.jsx";
 
 const MyCv = ({ mode }) => {
-    const userToken = GetAuthenticatedUserToken();
     const userId = GetAuthenticatedUserId();
+    const userToken = GetAuthenticatedUserToken();
 
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -46,6 +47,8 @@ const MyCv = ({ mode }) => {
         return <FlashMessage message={error} />;
     }
 
+    console.log(userData);
+
     if (!userData.cv && mode === MyCvViewModeEnum.VIEW) {
         return (
             <div className="container mt-5">
@@ -53,7 +56,7 @@ const MyCv = ({ mode }) => {
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title mb-4">Mon CV</h5>
-                        <p>Vous n'avez pas encore de CV</p>
+                        <p>Vous n&apos;avez pas encore de CV</p>
                         <Link to="/cv/create" className="btn btn-primary">
                             Créer un CV
                         </Link>
@@ -64,17 +67,7 @@ const MyCv = ({ mode }) => {
     }
 
     if (!userData.cv && mode === MyCvViewModeEnum.CREATE) {
-        return (
-            <div className="container mt-5">
-                <h1 className="mb-4">Créer un CV</h1>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title mb-4">Créer un CV</h5>
-                        <p>Création de CV</p>
-                    </div>
-                </div>
-            </div>
-        );
+        return <ManageMyCv userToken={userToken} mode={mode} />;
     }
 
     return <p>ok</p>;
