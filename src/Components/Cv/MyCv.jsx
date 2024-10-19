@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import MyCvViewModeEnum from "../../Enum/MyCvViewModeEnum.js";
 import { Link } from "react-router-dom";
 import ManageMyCv from "./MyCvDisplayMode/ManageMyCv.jsx";
+import CvTemplate from "./CvTemplate.jsx";
 
 const MyCv = ({ mode }) => {
     const userId = GetAuthenticatedUserId();
@@ -47,8 +48,6 @@ const MyCv = ({ mode }) => {
         return <FlashMessage message={error} />;
     }
 
-    console.log(userData);
-
     if (!userData.cv && mode === MyCvViewModeEnum.VIEW) {
         return (
             <div className="container mt-5">
@@ -68,6 +67,15 @@ const MyCv = ({ mode }) => {
 
     if (!userData.cv && mode === MyCvViewModeEnum.CREATE) {
         return <ManageMyCv userToken={userToken} mode={mode} />;
+    }
+
+    if (userData.cv) {
+        return (
+            <>
+                Mon Cv
+                <CvTemplate userData={userData} />
+            </>
+        );
     }
 
     return <p>ok</p>;

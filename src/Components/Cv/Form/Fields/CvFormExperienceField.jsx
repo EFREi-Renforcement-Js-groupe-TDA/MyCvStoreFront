@@ -21,12 +21,12 @@ function CvFormExperienceField({ values }) {
                                 <ErrorMessage style={{ color: "red" }} name={`experience.${index}.position`} component="div" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor={`experience.${index}.startDate`}>Date de début :</label>
+                                <label htmlFor={`experience.${index}.startDate`}>Année de début :</label>
                                 <Field className="form-control" type="number" name={`experience.${index}.startDate`} />
                                 <ErrorMessage style={{ color: "red" }} name={`experience.${index}.startDate`} component="div" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor={`experience.${index}.endDate`}>Date de fin :</label>
+                                <label htmlFor={`experience.${index}.endDate`}>Année de fin :</label>
                                 <Field className="form-control" type="number" name={`experience.${index}.endDate`} />
                                 <ErrorMessage style={{ color: "red" }} name={`experience.${index}.endDate`} component="div" />
                             </div>

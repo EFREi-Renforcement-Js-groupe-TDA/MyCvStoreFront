@@ -26,12 +26,12 @@ function CvFormEducationField({ values }) {
                                 <ErrorMessage style={{ color: "red" }} name={`education.${index}.description`} component="div" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor={`education.${index}.startDate`}>Date de début :</label>
+                                <label htmlFor={`education.${index}.startDate`}>Année de début :</label>
                                 <Field className="form-control" type="number" name={`education.${index}.startDate`} />
                                 <ErrorMessage style={{ color: "red" }} name={`education.${index}.startDate`} component="div" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor={`education.${index}.endDate`}>Date de fin :</label>
+                                <label htmlFor={`education.${index}.endDate`}>Année de fin :</label>
                                 <Field className="form-control" type="number" name={`education.${index}.endDate`} />
                                 <ErrorMessage style={{ color: "red" }} name={`education.${index}.endDate`} component="div" />
                             </div>
