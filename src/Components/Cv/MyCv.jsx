@@ -8,6 +8,7 @@ import MyCvViewModeEnum from "../../Enum/MyCvViewModeEnum.js";
 import { Link } from "react-router-dom";
 import ManageMyCv from "./MyCvDisplayMode/ManageMyCv.jsx";
 import CvTemplate from "./CvTemplate.jsx";
+import { deleteCv } from "../../Utils/Cv/CvManager.js";
 
 const MyCv = ({ mode }) => {
     const userId = GetAuthenticatedUserId();
@@ -48,37 +49,46 @@ const MyCv = ({ mode }) => {
         return <FlashMessage message={error} />;
     }
 
-    if (!userData.cv && mode === MyCvViewModeEnum.VIEW) {
-        return (
-            <div className="container mt-5">
-                <h1 className="mb-4">CV</h1>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title mb-4">Mon CV</h5>
-                        <p>Vous n&apos;avez pas encore de CV</p>
-                        <Link to="/cv/create" className="btn btn-primary">
-                            Créer un CV
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     if (!userData.cv && mode === MyCvViewModeEnum.CREATE) {
         return <ManageMyCv userToken={userToken} mode={mode} />;
+    }
+
+    if (userData.cv && mode === MyCvViewModeEnum.EDIT) {
+        return <ManageMyCv userToken={userToken} mode={mode} userData={userData.cv} cvData={userData.cv} />;
     }
 
     if (userData.cv) {
         return (
             <>
-                Mon Cv
+                <div className="container mt-5">
+                    <h1>Mon Cv</h1>
+                    <p>Visibilité : {userData.cv.private ? "Privé" : "Public"}</p>
+                    <Link className="btn btn-primary" to="/cv/edit">
+                        Modifier
+                    </Link>
+                    <Link to="/profile" className="btn btn-danger ms-2" onClick={() => deleteCv(userToken, userData.cv._id)}>
+                        Supprimer
+                    </Link>
+                </div>
                 <CvTemplate userData={userData} />
             </>
         );
     }
 
-    return <p>ok</p>;
+    return (
+        <div className="container mt-5">
+            <h1 className="mb-4">CV</h1>
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title mb-4">Mon CV</h5>
+                    <p>Vous n&apos;avez pas encore de CV</p>
+                    <Link to="/cv/create" className="btn btn-primary">
+                        Créer un CV
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 MyCv.propTypes = {

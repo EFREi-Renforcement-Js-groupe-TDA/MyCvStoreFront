@@ -9,7 +9,7 @@ function CvFormExperienceField({ values }) {
                     <h4>Expériences professionnelles</h4>
                     {values.experience.map((_, index) => (
                         <div key={index}>
-                            <h5 className="mt-2">Cursus {index + 1}</h5>
+                            <h5 className="mt-2">Experience {index + 1}</h5>
                             <div className="form-group">
                                 <label htmlFor={`experience.${index}.compagny`}>Entreprise :</label>
                                 <Field className="form-control" type="text" name={`experience.${index}.compagny`} />

@@ -17,13 +17,13 @@ import CvFormEducationField from "./Fields/CvFormEducationField.jsx";
 import CvFormExperienceField from "./Fields/CvFormExperienceField.jsx";
 import CvFormVisibilityFIeld from "./Fields/CvFormVisibilityFIeld.jsx";
 
-function CvForm({ userToken, mode, cvId = null }) {
+function CvForm({ userToken, mode, cvData = null }) {
     const navigate = useNavigate();
     const [flashMessage, setFlashMessage] = React.useState("");
     let endpoint;
     let requestMethod;
-    if (cvId && mode === MyCvViewModeEnum.EDIT) {
-        endpoint = getApiRoute(`cv/update/${cvId}`);
+    if (cvData && mode === MyCvViewModeEnum.EDIT) {
+        endpoint = getApiRoute(`cv/update/${cvData._id}`);
         requestMethod = "PATCH";
     } else if (mode === MyCvViewModeEnum.CREATE) {
         endpoint = getApiRoute(`cv/createCv`);
@@ -31,8 +31,6 @@ function CvForm({ userToken, mode, cvId = null }) {
     }
 
     if (!endpoint || !requestMethod) {
-        navigate("/");
-
         return null;
     }
 
@@ -41,16 +39,16 @@ function CvForm({ userToken, mode, cvId = null }) {
             <FlashMessage message={flashMessage} />
             <Formik
                 initialValues={{
-                    title: "",
-                    biography: "",
-                    telephone: "",
-                    linkedin: "",
-                    skills: [""],
-                    softSkills: [""],
-                    language: [""],
-                    education: [{ school: "", formation: "", description: "", startDate: "", endDate: "" }],
-                    experience: [{ compagny: "", position: "", startDate: "", endDate: "" }],
-                    private: false,
+                    title: cvData ? cvData.title : "",
+                    biography: cvData ? cvData.biography : "",
+                    telephone: cvData ? cvData.telephone : "",
+                    linkedin: cvData ? cvData.linkedin : "",
+                    skills: cvData ? cvData.skills : [""],
+                    softSkills: cvData ? cvData.softSkills : [""],
+                    language: cvData ? cvData.language : [""],
+                    education: cvData ? cvData.education : [{ school: "", formation: "", description: "", startDate: "", endDate: "" }],
+                    experience: cvData ? cvData.experience : [{ compagny: "", position: "", startDate: "", endDate: "" }],
+                    private: cvData ? cvData.private : false,
                 }}
                 onSubmit={async (values) => {
                     try {
@@ -134,7 +132,7 @@ function CvForm({ userToken, mode, cvId = null }) {
 CvForm.propTypes = {
     userToken: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(Object.values(MyCvViewModeEnum)).isRequired,
-    cvId: PropTypes.string,
+    cvData: PropTypes.object,
 };
 
 export default CvForm;
