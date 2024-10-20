@@ -37,31 +37,24 @@ function Index() {
         return <FlashMessage message={error} />;
     }
 
-    // const handleSearchChange = (event) => {
-    //     setSearchTerm(event.target.value);
-    // };
-    //
-    // const filteredCvs = publicCvs.filter((publicCv) => {
-    //     const cvData = cvId.cvData;
-    //     const fullName = `${cvData.user.firstname} ${cvData.user.lastname}`.toLowerCase();
-    //     return fullName.includes(searchTerm.toLowerCase());
-    // });
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredCvs = publicCvs.filter((publicCv) => {
+        const fullName = `${publicCv.user.firstname} ${publicCv.user.lastname}`.toLowerCase();
+        return fullName.includes(searchTerm.toLowerCase());
+    });
 
     return (
         <div className="container mt-5">
             <h1 className="mb-4">Liste des CV</h1>
 
-            {/*<input*/}
-            {/*    type="text"*/}
-            {/*    className="form-control mb-4"*/}
-            {/*    placeholder="Rechercher par prénom ou nom"*/}
-            {/*    value={searchTerm}*/}
-            {/*    onChange={handleSearchChange}*/}
-            {/*/>*/}
-
             <div className="container">
+                <input type="text" className="form-control mb-4" placeholder="Rechercher par prénom ou nom" value={searchTerm} onChange={handleSearchChange} />
+
                 <div className="row">
-                    {publicCvs.map((publicCv) => (
+                    {filteredCvs.map((publicCv) => (
                         <div key={publicCv.id} className="col-3 mb-4">
                             <CvCard cvData={publicCv} />
                         </div>
