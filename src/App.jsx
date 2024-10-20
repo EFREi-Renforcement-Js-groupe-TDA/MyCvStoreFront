@@ -9,6 +9,7 @@ import DisclaimerPopup from "./Components/Misc/DisclaimerPopup.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ShowMyCv from "./Pages/Cv/ShowMyCv.jsx";
 import MyCvViewModeEnum from "./Enum/MyCvViewModeEnum.js";
+import ShowCv from "./Pages/Cv/ShowCv.jsx";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path={"/my-cv"} element={<ShowMyCv mode={MyCvViewModeEnum.VIEW} />} />
                 <Route path={"/cv/edit"} element={<ShowMyCv mode={MyCvViewModeEnum.EDIT} />} />
                 <Route path={"/cv/create"} element={<ShowMyCv mode={MyCvViewModeEnum.CREATE} />} />
+                <Route path={"/cv/:cvId"} element={<ShowCv />} />
             </Routes>
         </div>
     );

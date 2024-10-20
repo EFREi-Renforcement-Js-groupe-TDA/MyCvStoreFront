@@ -52,8 +52,6 @@ function CvForm({ userToken, mode, cvData = null }) {
                 }}
                 onSubmit={async (values) => {
                     try {
-                        console.log(values);
-
                         const response = await fetch(endpoint, {
                             method: requestMethod,
                             headers: {

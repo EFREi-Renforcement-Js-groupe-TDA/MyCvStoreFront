@@ -70,7 +70,7 @@ const MyCv = ({ mode }) => {
                         Supprimer
                     </Link>
                 </div>
-                <CvTemplate userData={userData} />
+                <CvTemplate cv={userData.cv} />
             </>
         );
     }

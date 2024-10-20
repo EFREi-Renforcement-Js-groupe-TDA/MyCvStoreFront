@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function CvTemplate({ userData }) {
-    const cv = userData.cv;
+function CvTemplate({ cv }) {
+    const userData = cv.user;
 
     return (
         <div className="container mt-5 mb-5 border border-2 shadow">
             <div className="row">
                 <div className="col-3 bg-lightblue p-4">
-                    <p>
+                    <div>
                         <h5 className="fw-bold">Contact</h5>
                         {userData.firstname} {userData.lastname}
                         <br />
@@ -20,40 +20,40 @@ function CvTemplate({ userData }) {
                         <a href={cv.linkedin} target="_blank" rel="noopener noreferrer">
                             Lien
                         </a>
-                    </p>
+                    </div>
                     <hr />
-                    <p>
+                    <div>
                         <h5 className="fw-bold">Qui suis-je ?</h5>
                         {cv.biography}
-                    </p>
+                    </div>
                     <hr />
-                    <p>
+                    <div>
                         <h5 className="fw-bold">Langues parlées</h5>
                         <ul className="list-unstyled">
                             {cv.language.map((lang, index) => (
                                 <li key={index}>- {lang}</li>
                             ))}
                         </ul>
-                    </p>
+                    </div>
                     <hr />
-                    <p>
+                    <div>
                         <h5 className="fw-bold">Soft Skills</h5>
                         <ul className="list-unstyled">
                             {cv.softSkills.map((softSkill, index) => (
                                 <li key={index}>- {softSkill}</li>
                             ))}
                         </ul>
-                    </p>
+                    </div>
                 </div>
 
                 <div className="col-9">
                     <div className="row bg-warning bg-dark-subtle">
-                        <p className="text-center mt-4">
+                        <div className="text-center mt-4 center pb-3">
                             <h1>{cv.title}</h1>
-                        </p>
+                        </div>
                     </div>
                     <div className="row pt-4 ps-5 pe-5 pb-3">
-                        <p>
+                        <div>
                             <h4 className="fw-bold">Experiences professionnelles</h4>
                             {cv.experience.map((exp, index) => (
                                 <div key={index} className="mb-2">
@@ -66,9 +66,9 @@ function CvTemplate({ userData }) {
                                     </span>
                                 </div>
                             ))}
-                        </p>
+                        </div>
                         <hr />
-                        <p>
+                        <div>
                             <h4 className="fw-bold">Cursus scolaire</h4>
                             {cv.education.map((edu, index) => (
                                 <div key={index} className="mb-2">
@@ -82,16 +82,16 @@ function CvTemplate({ userData }) {
                                     <p>{edu.description}</p>
                                 </div>
                             ))}
-                        </p>
+                        </div>
                         <hr />
-                        <p>
+                        <div>
                             <h4 className="fw-bold">Compétences</h4>
                             <ul className="list-unstyled">
                                 {cv.skills.map((skill, index) => (
                                     <li key={index}>{skill}</li>
                                 ))}
                             </ul>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@ function CvTemplate({ userData }) {
 }
 
 CvTemplate.propTypes = {
-    userData: PropTypes.object.isRequired,
+    cv: PropTypes.object.isRequired,
 };
 
 export default CvTemplate;
