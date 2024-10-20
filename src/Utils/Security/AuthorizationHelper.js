@@ -11,7 +11,7 @@ export const useRequireLoggedUser = (redirect = true) => {
         if (!user && redirect) {
             navigate("/login");
         }
-    }, [user, navigate]);
+    }, [user, navigate, redirect]);
 
     return !!user;
 };

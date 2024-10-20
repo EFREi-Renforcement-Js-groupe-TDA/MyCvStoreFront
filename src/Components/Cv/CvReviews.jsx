@@ -38,8 +38,6 @@ function CvReviews({ cvId, cvReviews }) {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
-
                 setReviews([...reviews, data]);
                 setReview("");
                 setError(null);
