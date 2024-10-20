@@ -2,16 +2,16 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-export const useRequireLoggedUser = () => {
+export const useRequireLoggedUser = (redirect = true) => {
     const { getUserInfos } = useContext(UserContext);
     const user = getUserInfos();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!user) {
+        if (!user && redirect) {
             navigate("/login");
         }
-    }, [user, navigate]);
+    }, [user, navigate, redirect]);
 
     return !!user;
 };

@@ -4,3 +4,7 @@
     align-items: center;
     height: 85vh;
 }
+
+.bg-lightblue {
+    background-color: #86b0c1;
+}
